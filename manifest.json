@@ -1,0 +1,27 @@
+{
+  "name": "cat 'n mouse",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "changes your cursor to a cat",
+  "action": {
+    "default_title": "cat 'n mouse"
+  },
+  "commands": {
+    "cursor-toggle": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "toggle cursor"
+    }
+  },
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "css": ["style.css"],
+      "js": ["content.js"]
+    }
+  ]
+}

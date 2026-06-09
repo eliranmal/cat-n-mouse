@@ -1,0 +1,10 @@
+
+:root {
+  --cat-url: '';
+}
+
+.cat-cursor,
+.cat-cursor * {
+  cursor: var(--cat-url), auto !important;
+}
+
