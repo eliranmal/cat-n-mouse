@@ -1,0 +1,39 @@
+
+html {
+    font-size: 20px;
+}
+
+body {
+    width: 300px;
+    margin: 0;
+    padding: 1rem 2rem;
+    text-align: center;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+}
+
+form > * {
+    box-sizing: border-box;
+    display: block;
+    margin: .5rem 0;
+    padding: 0;
+    float: left;
+    width: 67%;
+}
+
+form > label {
+    clear: left;
+    width: 33%;
+    padding-right: 1rem;
+    text-align: right;
+}
+
+/* clearfix */
+form::after {
+    content: "";
+    display: table;
+    clear: both;
+}

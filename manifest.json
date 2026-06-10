@@ -1,13 +1,14 @@
 {
   "name": "cat 'n mouse",
-  "version": "1.0",
+  "version": "1.1",
   "manifest_version": 3,
   "description": "changes your cursor to a cat",
   "action": {
-    "default_title": "cat 'n mouse"
+    "default_title": "cat 'n mouse",
+    "default_popup": "popup.html"
   },
   "commands": {
-    "cursor-toggle": {
+    "toggle-cursor": {
       "suggested_key": {
         "default": "Alt+Shift+C"
       },
@@ -23,5 +24,9 @@
       "css": ["style.css"],
       "js": ["content.js"]
     }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
   ]
 }
