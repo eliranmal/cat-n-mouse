@@ -183,9 +183,3 @@ input[type="radio"][value="cat-25"] {
             url('chrome-extension://__MSG_@@extension_id__/images/cat-25.png'),
             url('moz-extension://__MSG_@@extension_id__/images/cat-25.png');
 }
-
-input[type="radio"][value="cat-26"] {
-    background-image:
-            url('chrome-extension://__MSG_@@extension_id__/images/cat-26.png'),
-            url('moz-extension://__MSG_@@extension_id__/images/cat-26.png');
-}

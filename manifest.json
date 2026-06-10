@@ -53,8 +53,7 @@
         "images/cat-22.png",
         "images/cat-23.png",
         "images/cat-24.png",
-        "images/cat-25.png",
-        "images/cat-26.png"
+        "images/cat-25.png"
       ],
       "matches": ["https://*/*"]
     }
