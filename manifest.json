@@ -12,7 +12,13 @@
       "suggested_key": {
         "default": "Alt+1"
       },
-      "description": "toggle cursor"
+      "description": "toggle cursor on/off"
+    },
+    "switch-cursor": {
+      "suggested_key": {
+        "default": "Alt+2"
+      },
+      "description": "switch cursor image"
     }
   },
   "background": {
