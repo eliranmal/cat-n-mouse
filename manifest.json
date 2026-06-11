@@ -1,10 +1,10 @@
 {
-  "name": "cat 'n mouse",
+  "name": "mouse kittens",
   "version": "1.2",
   "manifest_version": 3,
   "description": "changes your cursor to a cat",
   "action": {
-    "default_title": "cat 'n mouse",
+    "default_title": "mouse kittens",
     "default_popup": "popup.html"
   },
   "commands": {
