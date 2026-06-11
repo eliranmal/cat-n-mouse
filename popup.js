@@ -1,7 +1,7 @@
 {
     const settingsFormEl = document.getElementById('popup-form');
 
-    const urlParamsChangeHandler = (ev) => {
+    const saveSettingHandler = (ev) => {
         if (ev.target) {
             chrome.storage.local.set({
                 [ev.target.name]: ev.target.value,
@@ -15,7 +15,7 @@
         ).checked = true;
     }
 
-    const loadCatRadioState = () => (
+    const loadCatNameSetting = () => (
         chrome.storage.local.get({
             'cat-name': 'cat-1',
         }).then((data) => (
@@ -36,14 +36,14 @@
 
 
     // bind event listeners
-    attachDelegatedRadioChangeHandler(urlParamsChangeHandler);
+    attachDelegatedRadioChangeHandler(saveSettingHandler);
 
     // populate initial values from storage
-    loadCatRadioState();
+    loadCatNameSetting();
 
     chrome.runtime.onMessage.addListener((msg) => {
         if (msg.command === 'switch-cursor') {
-            loadCatRadioState();
+            selectCatRadio(msg.newCatName);
         }
     });
 }

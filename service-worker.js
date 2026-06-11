@@ -19,21 +19,35 @@ const rotateCursor = async () => {
     'cat-name': 'cat-1',
   });
   const nextCatName = rotateCatName(currentData['cat-name']);
-  return chrome.storage.local.set({
+  await chrome.storage.local.set({
     'cat-name': nextCatName,
   });
+  return nextCatName;
 };
 
+const notifyActiveTab = (data) => {
+  chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+    // when popup is open, tabs[0] is undefined
+    if (tabs[0]) {
+      chrome.tabs.sendMessage(tabs[0].id, data);
+    }
+  });
+}
 
 chrome.commands.onCommand.addListener(async (command) => {
-  if (command === 'switch-cursor') {
-    await rotateCursor();
-    chrome.runtime.sendMessage({ command });
-  }
-
-  if (['toggle-cursor', 'switch-cursor'].includes(command)) {
-    chrome.tabs.query({active: true, currentWindow: true}, tabs => (
-      chrome.tabs.sendMessage(tabs[0].id, { command })
-    ));
+  switch (command) {
+    case 'toggle-cursor':
+      // only active tab needs to know about cursor toggle; use tabs API
+      notifyActiveTab({ command });
+      break;
+    case 'switch-cursor':
+      const newCatName = await rotateCursor();
+      // both popup and content script need to know about
+      // cursor switch; use runtime and tabs APIs, respectively
+      chrome.runtime.sendMessage({ command, newCatName });
+      notifyActiveTab({ command, newCatName });
+      break;
+    default:
+      break;
   }
 });

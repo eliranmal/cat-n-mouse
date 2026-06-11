@@ -1,21 +1,22 @@
 
 {
+  const toggleCursor = () => (
+    document.documentElement.classList.toggle('cat-cursor')
+  );
 
-  const toggleCursor = () => {
-    document.documentElement.classList.toggle('cat-cursor');
-  }
-
-  const setCatUrl = (name = 'cat-1') => {
-
+  const buildImageUrls = (fileName) => {
     // same as referencing `__MSG_@@extension_id__` in CSS files
     const extensionId = chrome.i18n.getMessage('@@extension_id');
+    // build two URLs for chromium/gecko-based browsers
+    return ['chrome-extension', 'moz-extension']
+        .map(protocol => (
+            `url('${protocol}://${extensionId}/images/${fileName}.png')`)
+        )
+        .join(', ');
+  };
 
-    // use fallback URLs, for chromium / gecko based browsers
-    const cursorUrls =
-        ['chrome-extension', 'moz-extension']
-            .map(protocol => `url('${protocol}://${extensionId}/images/${name}.png')`)
-            .join(', ');
-
+  const renderCursor = (catName = 'cat-1') => {
+    const cursorUrls = buildImageUrls(catName);
     document.documentElement.style.setProperty('--cursor-urls', cursorUrls);
   }
 
@@ -23,17 +24,16 @@
   // register event listeners
 
   chrome.runtime.onMessage.addListener((msg) => {
-    if (msg.command === 'toggle-cursor') {
+    switch (msg.command) {
+      case 'toggle-cursor':
         toggleCursor();
+        break;
+      case 'switch-cursor':
+        renderCursor(msg.newCatName);
+        break;
+      default:
+        break;
     }
-  });
-
-  chrome.storage.local.onChanged.addListener(async (changes) => {
-    const currentData = await chrome.storage.local.get();
-    const catNameChange = changes['cat-name'];
-    setCatUrl(
-        catNameChange ? catNameChange.newValue : currentData['cat-name'],
-    );
   });
 
 
@@ -42,7 +42,6 @@
   chrome.storage.local.get({
     'cat-name': 'cat-1',
   }).then((data) => (
-    setCatUrl(data['cat-name'])
+    renderCursor(data['cat-name'])
   ));
-
 }
