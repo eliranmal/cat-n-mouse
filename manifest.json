@@ -58,5 +58,11 @@
       "matches": ["https://*/*"]
     }
   ],
+  "icons": {
+    "16": "images/cat-1.png",
+    "32": "images/cat-1.png",
+    "48": "images/cat-1.png",
+    "128": "images/cat-1.png"
+  },
   "permissions": ["storage"]
 }
