@@ -10,7 +10,7 @@
   "commands": {
     "toggle-cursor": {
       "suggested_key": {
-        "default": "Alt+Shift+A"
+        "default": "Alt+1"
       },
       "description": "toggle cursor"
     }
