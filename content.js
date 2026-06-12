@@ -42,6 +42,6 @@
   chrome.storage.local.get({
     'cat-name': 'cat-1',
   }).then((data) => (
-    renderCursor(data['cat-name'])
+      renderCursor(data['cat-name'])
   ));
 }

@@ -2,11 +2,22 @@
     const settingsFormEl = document.getElementById('popup-form');
 
     const saveSettingHandler = (ev) => {
-        if (ev.target) {
-            chrome.storage.local.set({
-                [ev.target.name]: ev.target.value,
-            });
+        if (!ev.target) {
+            return;
         }
+
+        chrome.storage.local.set({
+            [ev.target.name]: ev.target.value,
+        });
+
+        chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+            if (tabs[0]) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    command: 'switch-cursor',
+                    newCatName: ev.target.value,
+                });
+            }
+        });
     }
 
     const selectCatRadio = (catName) => {
